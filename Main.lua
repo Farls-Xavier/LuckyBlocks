@@ -21,10 +21,10 @@ local MainStuff = {
     ["Kill all"] = Tabs.Main:Button({
         Text = "Attempt to kill all",
         Callback = function()
-            if Player.Backpack:FindFirstChild("HexSpitter") then
-                Player.Backpack.HexSpitter.Parent = Player.Character
-            else
-                if game.Players.LocalPlayer.Character:FindFirstChild("HexSpitter") then
+            if Player.Backpack:FindFirstChild("HexSpitter") or Player.Character:FindFirstChild("HexSpitter") then
+                if Player.Backpack:FindFirstChild("HexSpitter") then
+                    Player.Backpack:FindFirstChild("HexSpitter").Parent = Player.Character
+
                     local HexSpitter = game.Players.LocalPlayer.Character.HexSpitter
                     local ServerControl = HexSpitter.Remotes.ServerControl
                     for _ = 1,20 do
@@ -34,23 +34,50 @@ local MainStuff = {
                             end
                         end
                     end
+
                 end
-            end
-            local HexSpitter = game.Players.LocalPlayer.Character.HexSpitter
-            local ServerControl = HexSpitter.Remotes.ServerControl
-            for _ = 1,20 do
-                for _, Child in next, game.Players:GetPlayers() do
-                    if Child ~= game.Players.LocalPlayer then
-                        ServerControl:InvokeServer('RayHit', {['Position'] = Child.Character.Head.Position, ["Hit"] = Child.Character.Head})
+
+                local HexSpitter = game.Players.LocalPlayer.Character.HexSpitter
+                local ServerControl = HexSpitter.Remotes.ServerControl
+                for _ = 1,20 do
+                    for _, Child in next, game.Players:GetPlayers() do
+                        if Child ~= game.Players.LocalPlayer then
+                            ServerControl:InvokeServer('RayHit', {['Position'] = Child.Character.Head.Position, ["Hit"] = Child.Character.Head})
+                        end
                     end
                 end
+            else
+                Window:Notification("Notification", "HexSpitter not found", 5)
             end
         end
     }),
 
-    ["Seperator"] = Tabs.Main:Label({
-        Text = "",
-        Weight = Enum.FontWeight.Medium
+    ["info"] = Tabs.Main:Label({
+        Text = "For kill all you need a hex spitter."
+    }),
+
+    ["Earrape"] = Tabs.Main:Button({
+        Text = "Earrape children",
+        Callback = function()
+
+            local co = coroutine.create(function()
+                for i = 1, 5 do
+                    for _, sound in next, workspace:GetDescendants() do
+                        if sound:IsA("Sound") then
+                            sound:Play()
+                        end
+                     end
+                     
+                     for _, sound in next, game.ReplicatedStorage:GetDescendants() do
+                        if sound:IsA("Sound") then
+                            sound:Play()
+                        end
+                     end
+                    wait(3)
+                end
+            end)
+            coroutine.resume(co)
+        end
     }),
 
     ["Give 1 Block"] = Tabs.Main:Button({
