@@ -27,7 +27,7 @@ local MainStuff = {
 
                     local HexSpitter = game.Players.LocalPlayer.Character.HexSpitter
                     local ServerControl = HexSpitter.Remotes.ServerControl
-                    for _ = 1,20 do
+                    for _ = 1,250 do
                         for _, Child in next, game.Players:GetPlayers() do
                             if Child ~= game.Players.LocalPlayer then
                                 ServerControl:InvokeServer('RayHit', {['Position'] = Child.Character.Head.Position, ["Hit"] = Child.Character.Head})
