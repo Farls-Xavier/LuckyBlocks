@@ -57,26 +57,19 @@ local MainStuff = {
     }),
 
     ["Earrape"] = Tabs.Main:Button({
-        Text = "Earrape children",
+        Text = "Earrape children(Don't spam)",
         Callback = function()
-
-            local co = coroutine.create(function()
-                for i = 1, 5 do
-                    for _, sound in next, workspace:GetDescendants() do
-                        if sound:IsA("Sound") then
-                            sound:Play()
-                        end
-                     end
-                     
-                     for _, sound in next, game.ReplicatedStorage:GetDescendants() do
-                        if sound:IsA("Sound") then
-                            sound:Play()
-                        end
-                     end
-                    wait(3)
+            for _, sound in next, workspace:GetDescendants() do
+                if sound:IsA("Sound") then
+                    sound:Play()
                 end
-            end)
-            coroutine.resume(co)
+             end
+             
+             for _, sound in next, game.ReplicatedStorage:GetDescendants() do
+                if sound:IsA("Sound") then
+                    sound:Play()
+                end
+             end
         end
     }),
 
