@@ -1,9 +1,14 @@
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Farls-Xavier/UiLibrary/main/Library.lua"))()
 
+game:GetService("StarterGui"):SetCore("SendNotification",{
+    Title = "Sorry!",
+    Text = "This wont be getting any updates sorry :sob: maybe it will?? kidding... :sob:",
+})
+
 local Player = game.Players.LocalPlayer
 
 local Window = Library:Window({
-	Title = "Lucky Blocks"
+	Title = "Lucky Blocks - 662417684"
 })
 
 local Tabs = {
@@ -27,7 +32,7 @@ local MainStuff = {
 
                     local HexSpitter = game.Players.LocalPlayer.Character.HexSpitter
                     local ServerControl = HexSpitter.Remotes.ServerControl
-                    for _ = 1,250 do
+                    for _ = 1,20 do
                         for _, Child in next, game.Players:GetPlayers() do
                             if Child ~= game.Players.LocalPlayer then
                                 ServerControl:InvokeServer('RayHit', {['Position'] = Child.Character.Head.Position, ["Hit"] = Child.Character.Head})
